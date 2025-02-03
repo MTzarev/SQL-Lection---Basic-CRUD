@@ -51,3 +51,9 @@ CREATE TABLE clients (
 INSERT INTO clients(`first_name`,`last_name`,`room_id`) 
 VALUES('Pesho','Petrov', 1),('Gosho','Georgiev', 2),
 ('Mariya','Marieva', 2), ('Katya','Katerinova', 1), ('Nikolay','Nikolaev', 2);
+
+-- Exercise 6 
+
+delete from `employees`
+where `department_id` < 3;
+select * from `employees` order by `id`;
