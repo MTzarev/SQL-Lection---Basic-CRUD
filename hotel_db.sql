@@ -5,7 +5,6 @@ CREATE TABLE departments (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50)
 );
-
 INSERT INTO departments(name) VALUES('Front Office'), ('Support'), ('Kitchen'), ('Other');
 
 CREATE TABLE employees (
