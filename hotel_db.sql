@@ -103,7 +103,6 @@ WHERE
             MAX(salary)
         FROM
             `employees`);
-
 SELECT 
     *
 FROM
