@@ -52,7 +52,7 @@ INSERT INTO clients(`first_name`,`last_name`,`room_id`)
 VALUES('Pesho','Petrov', 1),('Gosho','Georgiev', 2),
 ('Mariya','Marieva', 2), ('Katya','Katerinova', 1), ('Nikolay','Nikolaev', 2);
 
-# Exercise 5
+#Exercise 4
 
 Select * from `employees`
-where salary>1000 AND `department_id`= '4' order by `salary`; 
+where salary = (select Max(salary) from `employees`);
