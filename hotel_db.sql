@@ -51,6 +51,11 @@ CREATE TABLE clients (
 INSERT INTO clients(`first_name`,`last_name`,`room_id`) 
 VALUES('Pesho','Petrov', 1),('Gosho','Georgiev', 2),
 ('Mariya','Marieva', 2), ('Katya','Katerinova', 1), ('Nikolay','Nikolaev', 2);
+Drop schema car_rental;
+Drop Schema gamebar;
+Drop Schema minions;
+Drop Schema movies;
+Drop Schema soft_uni;
 
 ALTER TABLE `hotel`.`clients` 
 ADD COLUMN `accomodation` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `id`;
@@ -60,3 +65,32 @@ insert into `clients` (`first_name`, `last_name`, `room_id`) values ('test', 'te
 
 select `id`, `first_name`, `last_name`, `job_title` from `employees`;
 
+-- Exercise 2 
+
+SELECT `id`, CONCAT(first_name, ' ', last_name) as full_name, `job_title`, `salary` FROM `employees` 
+where salary>1000;
+
+-- Exercise 3 
+
+SET SQL_SAFE_UPDATES = 0;
+Update `employees`
+set salary = salary + 100
+where `job_title` = 'Manager';
+SET SQL_SAFE_UPDATES = 1;
+select `salary` from `employees`;
+
+#Exercise 4
+
+Select * from `employees`
+where salary = (select Max(salary) from `employees`);
+
+# Exercise 5
+
+Select * from `employees`
+where salary>1000 AND `department_id`= '4' order by `salary`; 
+
+-- Exercise 6 
+
+delete from `employees`
+where `department_id` < 3;
+select * from `employees` order by `id`;
