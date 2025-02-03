@@ -17,7 +17,6 @@ CREATE TABLE employees (
     CONSTRAINT `fk_department_id` FOREIGN KEY (`department_id`)
         REFERENCES `departments` (`id`)
 );
-
 INSERT INTO `employees` (`first_name`,`last_name`, `job_title`,`department_id`,`salary`) VALUES
 	('John', 'Smith', 'Manager',1, 900.00),
 	('John', 'Johnson', 'Customer Service',2, 880.00),
