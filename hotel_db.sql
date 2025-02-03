@@ -2,20 +2,21 @@ CREATE DATABASE IF NOT EXISTS `hotel`;
 USE `hotel`;
 
 CREATE TABLE departments (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	name VARCHAR(50)
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50)
 );
 
 INSERT INTO departments(name) VALUES('Front Office'), ('Support'), ('Kitchen'), ('Other');
 
 CREATE TABLE employees (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	first_name VARCHAR(50) NOT NULL,
-	last_name VARCHAR(50) NOT NULL,
-	job_title VARCHAR(50) NOT NULL,
-	department_id INT NOT NULL,
-	salary DOUBLE NOT NULL,
-	CONSTRAINT `fk_department_id` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`)
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    job_title VARCHAR(50) NOT NULL,
+    department_id INT NOT NULL,
+    salary DOUBLE NOT NULL,
+    CONSTRAINT `fk_department_id` FOREIGN KEY (`department_id`)
+        REFERENCES `departments` (`id`)
 );
 
 INSERT INTO `employees` (`first_name`,`last_name`, `job_title`,`department_id`,`salary`) VALUES
@@ -32,20 +33,19 @@ INSERT INTO `employees` (`first_name`,`last_name`, `job_title`,`department_id`,`
 
 	
 CREATE TABLE rooms (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	`type` VARCHAR(30)
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    `type` VARCHAR(30)
 );
 
 INSERT INTO rooms(`type`) VALUES('apartment'), ('single room');
 
 CREATE TABLE clients (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	first_name VARCHAR(50),
-	last_name VARCHAR(50),
-	room_id INT NOT NULL,
-    CONSTRAINT fk_clients_rooms
-    FOREIGN KEY (room_id)
-    REFERENCES rooms(id)
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    room_id INT NOT NULL,
+    CONSTRAINT fk_clients_rooms FOREIGN KEY (room_id)
+        REFERENCES rooms (id)
 );
 
 INSERT INTO clients(`first_name`,`last_name`,`room_id`) 
@@ -59,38 +59,69 @@ Drop Schema soft_uni;
 
 ALTER TABLE `hotel`.`clients` 
 ADD COLUMN `accomodation` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `id`;
-select * from `clients`;
+SELECT 
+    *
+FROM
+    `clients`;
 
 insert into `clients` (`first_name`, `last_name`, `room_id`) values ('test', 'testov', 1);
 
-select `id`, `first_name`, `last_name`, `job_title` from `employees`;
+SELECT 
+    `id`, `first_name`, `last_name`, `job_title`
+FROM
+    `employees`;
 
 -- Exercise 2 
 
-SELECT `id`, CONCAT(first_name, ' ', last_name) as full_name, `job_title`, `salary` FROM `employees` 
-where salary>1000;
+SELECT 
+    `id`,
+    CONCAT(first_name, ' ', last_name) AS full_name,
+    `job_title`,
+    `salary`
+FROM
+    `employees`
+WHERE
+    salary > 1000;
 
 -- Exercise 3 
 
 SET SQL_SAFE_UPDATES = 0;
-Update `employees`
-set salary = salary + 100
-where `job_title` = 'Manager';
+UPDATE `employees` 
+SET 
+    salary = salary + 100
+WHERE
+    `job_title` = 'Manager';
 SET SQL_SAFE_UPDATES = 1;
-select `salary` from `employees`;
+SELECT 
+    `salary`
+FROM
+    `employees`;
 
-#Exercise 4
+SELECT 
+    *
+FROM
+    `employees`
+WHERE
+    salary = (SELECT 
+            MAX(salary)
+        FROM
+            `employees`);
 
-Select * from `employees`
-where salary = (select Max(salary) from `employees`);
-
-# Exercise 5
-
-Select * from `employees`
-where salary>1000 AND `department_id`= '4' order by `salary`; 
+SELECT 
+    *
+FROM
+    `employees`
+WHERE
+    salary > 1000 AND `department_id` = '4'
+ORDER BY `salary`;
 
 -- Exercise 6 
 
-delete from `employees`
-where `department_id` < 3;
-select * from `employees` order by `id`;
+DELETE FROM `employees` 
+WHERE
+    `department_id` < 3;
+SELECT 
+    *
+FROM
+    `employees`
+ORDER BY `id`;
