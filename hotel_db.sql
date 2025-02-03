@@ -52,11 +52,8 @@ INSERT INTO clients(`first_name`,`last_name`,`room_id`)
 VALUES('Pesho','Petrov', 1),('Gosho','Georgiev', 2),
 ('Mariya','Marieva', 2), ('Katya','Katerinova', 1), ('Nikolay','Nikolaev', 2);
 
--- Exercise 3 
+-- Exercise 2 
 
-SET SQL_SAFE_UPDATES = 0;
-Update `employees`
-set salary = salary + 100
-where `job_title` = 'Manager';
-SET SQL_SAFE_UPDATES = 1;
-select `salary` from `employees`;
+SELECT `id`, CONCAT(first_name, ' ', last_name) as full_name, `job_title`, `salary` FROM `employees` 
+where salary>1000;
+
