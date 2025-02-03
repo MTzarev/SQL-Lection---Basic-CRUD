@@ -52,8 +52,11 @@ INSERT INTO clients(`first_name`,`last_name`,`room_id`)
 VALUES('Pesho','Petrov', 1),('Gosho','Georgiev', 2),
 ('Mariya','Marieva', 2), ('Katya','Katerinova', 1), ('Nikolay','Nikolaev', 2);
 
--- Exercise 2 
+ALTER TABLE `hotel`.`clients` 
+ADD COLUMN `accomodation` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `id`;
+select * from `clients`;
 
-SELECT `id`, CONCAT(first_name, ' ', last_name) as full_name, `job_title`, `salary` FROM `employees` 
-where salary>1000;
+insert into `clients` (`first_name`, `last_name`, `room_id`) values ('test', 'testov', 1);
+
+select `id`, `first_name`, `last_name`, `job_title` from `employees`;
 
