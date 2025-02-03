@@ -52,7 +52,11 @@ INSERT INTO clients(`first_name`,`last_name`,`room_id`)
 VALUES('Pesho','Petrov', 1),('Gosho','Georgiev', 2),
 ('Mariya','Marieva', 2), ('Katya','Katerinova', 1), ('Nikolay','Nikolaev', 2);
 
-#Exercise 4
+-- Exercise 3 
 
-Select * from `employees`
-where salary = (select Max(salary) from `employees`);
+SET SQL_SAFE_UPDATES = 0;
+Update `employees`
+set salary = salary + 100
+where `job_title` = 'Manager';
+SET SQL_SAFE_UPDATES = 1;
+select `salary` from `employees`;
